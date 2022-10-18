@@ -46,7 +46,7 @@ def get_transaction_code() -> str:
 
 # Helper functions for transaction processing
 def account_is_closable(balance):
-    if balance == 0:
+    if balance <= 0:
         print("Account is closed")
         return True
     print("Account not closed because money is still in it")
