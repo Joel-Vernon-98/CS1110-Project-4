@@ -23,8 +23,8 @@ def main():
 
             # while loop that runs until End of File is reached
             while file_line != end_of_file:
-                account_number = pm.get_number(file_line)
-                account_balance = pm.get_balance(file_line)
+                # Assign each piece of account information to a variable
+                account_number, account_balance = pm.get_number(file_line), pm.get_balance(file_line)
                 customer_name = pm.get_name(file_line)
                 print(f"Verifying input: {account_number} {account_balance} {customer_name}")
 
@@ -62,6 +62,7 @@ def main():
 
     except FileNotFoundError:
         print(f"The file name {old_file_name} does not exist.")
+    # Print statement so user knows program finished running without any errors
     else:
         print(f"\n{new_file_name} created successfully.")
 
