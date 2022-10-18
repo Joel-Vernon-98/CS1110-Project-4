@@ -17,15 +17,9 @@ def get_name(line: str) -> str:
 
 def process_transaction(transaction_type: str, balance: float, transaction_amount: float) -> float:
     if transaction_type == "w":
-        balance -= transaction_amount
-        if balance < 0:
-            raise ValueError("Error: This withdrawal amount will put your account below the minimum balance.")
-        return balance
+        return balance - transaction_amount
     else:
-        balance += transaction_amount
-        if balance > 9_999_999.99:
-            raise ValueError("Error: This deposit amount will put your account over the maximum balance.")
-        return balance
+        return balance + transaction_amount
 
 
 def get_transaction_amount(text: str) -> float:
@@ -48,7 +42,7 @@ def is_float(num: str) -> bool:
 
 
 def file_entry_string(account_number: str, balance: float, name: str) -> str:
-    return f"{account_number} {balance:10.2f} {name}\n"
+    return f"{account_number} {balance:10.2f} {name}"
 
 
 def get_transaction_code() -> str:
@@ -57,8 +51,14 @@ def get_transaction_code() -> str:
         if transaction_code.lower() in ("a", "c", "d", "w"):
             break
         else:
-            print(f"Entered an invalid command code {transaction_code}")
+            print(f"Entered an invalid command {transaction_code}.")
     return transaction_code.lower()
 
 
+def account_is_closable(balance):
+    if balance == 0:
+        print("Account is closed")
+        return True
+    print("Account not closed because money is still in it")
+    return False
 
