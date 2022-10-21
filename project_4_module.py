@@ -103,7 +103,7 @@ def transaction_amount_is_valid(transaction_amount: str) -> bool:
         print("INVALID INPUT: Please enter a numeric value.")
         return False
     else:
-        if float(transaction_amount) < 0.00:
+        if float(transaction_amount) <= 0.00:
             print("INVALID INPUT: Please enter a numeric value greater than 0.")
             return False
     return True

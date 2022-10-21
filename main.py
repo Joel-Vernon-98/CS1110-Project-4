@@ -8,8 +8,8 @@ def main():
     new_file_name = f"{file_prefix}_new.txt"
 
     try:
-        with open(old_file_name, "r") as old_file, open(new_file_name, "w") as new_file:
-            file_line = old_file.readline().strip("\n")
+        old_file, new_file = open(old_file_name, "r"), open(new_file_name, "w")
+        file_line = old_file.readline().strip("\n")
 
     except FileNotFoundError:
         print(f"The file name {old_file_name} does not exist.")
@@ -26,9 +26,10 @@ def main():
 
                 transaction_code = pm.get_transaction_code()
                 if transaction_code == "a":
-                    new_line = f"{pm.file_entry_string(account_number, account_balance, customer_name)}"
-                    new_file.write(f"{new_line}\n")
+
+                    new_line = pm.file_entry_string(account_number, account_balance, customer_name)
                     print(f"New balance: {new_line}")
+                    new_file.write(f"{new_line}\n")
                     break
 
                 elif transaction_code == "c":
@@ -54,7 +55,9 @@ def main():
                     print(f"Entered an invalid command {transaction_code}")
 
             file_line = old_file.readline().strip("\n")
+
         new_file.write(SENTINEL)
+        old_file.close(), new_file.close()
         print(f"\n{new_file_name} created successfully.")
 
 
